@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bike-sharing-demand"
+version = "1.0.0"
+description = "Hourly bike rental demand prediction (UCI Bike Sharing dataset) with FastAPI and CI/CD"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Alireza", email = "alirezahs81@example.com"}
+]
+keywords = ["machine-learning", "regression", "bike-sharing", "fastapi", "mlops"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pandas==2.2.2",
+    "numpy==1.26.4",
+    "scikit-learn==1.5.0",
+    "joblib==1.4.2",
+    "scipy==1.13.1",
+    "fastapi==0.111.0",
+    "uvicorn[standard]==0.30.1",
+    "pydantic==2.7.4",
+    "requests==2.32.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.2.2",
+    "pytest-cov==5.0.0",
+    "ruff==0.5.7",
+    "mypy==1.11.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/alirezahs81/bike-sharing-demand"
+Repository = "https://github.com/alirezahs81/bike-sharing-demand"
+Issues = "https://github.com/alirezahs81/bike-sharing-demand/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "I", "W", "UP", "B", "C4", "ANN", "T20"]
+ignore = ["ANN001", "ANN002", "ANN003", "ANN201", "ANN202", "ANN204", "ANN401", "T201", "T203"]
+exclude = [".git", "__pycache__", ".pytest_cache", "data", "models", "notebooks", ".venv", "venv"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --strict-markers --strict-config"
+markers = [
+    "slow: marks tests as slow",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/test_*.py"]
